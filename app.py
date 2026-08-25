@@ -152,20 +152,20 @@ if st.button("🚀 Przelicz Szanse i Pobierz Rekomendacje", type="primary", use_
                 winrate = model(t).item() * 100
                 recs.append({'Bohater': cand, 'Winrate': winrate})
         
-        df_top = pd.DataFrame(recs).sort_values(by='Winrate', ascending=False).head(5).reset_index(drop=True)
-        
-       rec_cols = st.columns(5)
-        for i, row in df_top.iterrows():
-            with rec_cols[i]:
-                st.markdown(
-                    f"""
-                    <div style="background-color: #1e1e1e; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #444;">
-                        <span style="color: #00ffcc; font-weight: bold; font-size: 12px;">#{i+1} REKOMENDACJA</span>
-                        <p style="font-size: 15px; margin: 6px 0; font-weight: bold; color: #fff;">{row['Bohater']}</p>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-                diff = row['Winrate'] - blue_prob
-                diff_str = f"+{diff:.2f}%" if diff >= 0 else f"{diff:.2f}%"
-                st.metric(label="Winrate", value=f"{row['Winrate']:.2f}%", delta=diff_str)
+          df_top = pd.DataFrame(recs).sort_values(by='Winrate', ascending=False).head(5).reset_index(drop=True)
+            
+            rec_cols = st.columns(5)
+            for i, row in df_top.iterrows():
+                with rec_cols[i]:
+                    st.markdown(
+                        f"""
+                        <div style="background-color: #1e1e1e; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #444;">
+                            <span style="color: #00ffcc; font-weight: bold; font-size: 12px;">#{i+1} REKOMENDACJA</span>
+                            <p style="font-size: 15px; margin: 6px 0; font-weight: bold; color: #fff;">{row['Bohater']}</p>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+                    diff = row['Winrate'] - blue_prob
+                    diff_str = f"+{diff:.2f}%" if diff >= 0 else f"{diff:.2f}%"
+                    st.metric(label="Winrate", value=f"{row['Winrate']:.2f}%", delta=diff_str)
