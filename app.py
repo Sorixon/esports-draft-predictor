@@ -67,15 +67,15 @@ def render_team_gallery(champions_list, title):
         return
     st.markdown(f"**{title}**")
     cols = st.columns(len(champions_list))
+    roles_icons = ["🛡️", "⚔️", "🔮", "🎯", "👁️"]
     for idx, champ in enumerate(champions_list):
         with cols[idx]:
-            icon_url = get_icon_url(champ)
-            # Renderowanie przez HTML zamiast st.image (omija blokady OneDrive)
+            role_icon = roles_icons[idx] if idx < len(roles_icons) else "🎮"
             st.markdown(
                 f"""
-                <div style="text-align: center;">
-                    <img src="{icon_url}" width="64" style="border-radius: 8px; border: 1px solid #444;">
-                    <p style="font-size: 14px; margin-top: 4px; font-weight: bold;">{champ}</p>
+                <div style="background-color: #1e1e1e; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #333;">
+                    <span style="font-size: 24px;">{role_icon}</span>
+                    <p style="font-size: 14px; margin: 6px 0 0 0; font-weight: bold; color: #fff;">{champ}</p>
                 </div>
                 """,
                 unsafe_allow_html=True
