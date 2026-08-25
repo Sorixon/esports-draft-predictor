@@ -154,15 +154,14 @@ if st.button("🚀 Przelicz Szanse i Pobierz Rekomendacje", type="primary", use_
         
         df_top = pd.DataFrame(recs).sort_values(by='Winrate', ascending=False).head(5).reset_index(drop=True)
         
-        rec_cols = st.columns(5)
+       rec_cols = st.columns(5)
         for i, row in df_top.iterrows():
             with rec_cols[i]:
-                icon_url = get_icon_url(row['Bohater'])
                 st.markdown(
                     f"""
-                    <div style="text-align: center;">
-                        <img src="{icon_url}" width="70" style="border-radius: 8px; border: 1px solid #555;">
-                        <p style="font-size: 13px; margin-top: 4px; font-weight: bold;">#{i+1} {row['Bohater']}</p>
+                    <div style="background-color: #1e1e1e; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #444;">
+                        <span style="color: #00ffcc; font-weight: bold; font-size: 12px;">#{i+1} REKOMENDACJA</span>
+                        <p style="font-size: 15px; margin: 6px 0; font-weight: bold; color: #fff;">{row['Bohater']}</p>
                     </div>
                     """,
                     unsafe_allow_html=True
