@@ -44,39 +44,22 @@ all_champions = sorted([c.replace('champion_', '') for c in columns if c.startsw
 # =====================================================================
 # 2. Integracja z Data Dragon API (Wersja Statyczna - Niezawodna)
 # =====================================================================
-PATCH_VERSION = "14.16.1"
+PATCH_VERSION = "14.18.1"
 
 def get_icon_url(champion_name):
-    # Słownik pokrywający wszystkie spacje, kropki i apostrofy w Lidze
     exceptions = {
-        "Wukong": "MonkeyKing",
-        "FiddleSticks": "Fiddlesticks",
-        "LeBlanc": "Leblanc",
-        "K'Sante": "KSante",
-        "Kai'Sa": "Kaisa",
-        "Kha'Zix": "Khazix",
-        "Cho'Gath": "Chogath",
-        "Vel'Koz": "Velkoz",
-        "Rek'Sai": "RekSai",
-        "Bel'Veth": "Belveth",
-        "Nunu & Willump": "Nunu",
-        "Renata Glasc": "Renata",
-        "Dr. Mundo": "DrMundo",
-        "Master Yi": "MasterYi",
-        "Twisted Fate": "TwistedFate",
-        "Xin Zhao": "XinZhao",
-        "Aurelion Sol": "AurelionSol",
-        "Tahm Kench": "TahmKench",
-        "Miss Fortune": "MissFortune",
-        "Jarvan IV": "JarvanIV",
+        "Wukong": "MonkeyKing", "FiddleSticks": "Fiddlesticks", "LeBlanc": "Leblanc",
+        "K'Sante": "KSante", "Kai'Sa": "Kaisa", "Kha'Zix": "Khazix", "Cho'Gath": "Chogath",
+        "Vel'Koz": "Velkoz", "Rek'Sai": "RekSai", "Bel'Veth": "Belveth", "Nunu & Willump": "Nunu",
+        "Renata Glasc": "Renata", "Dr. Mundo": "DrMundo", "Master Yi": "MasterYi",
+        "Twisted Fate": "TwistedFate", "Xin Zhao": "XinZhao", "Aurelion Sol": "AurelionSol",
+        "Tahm Kench": "TahmKench", "Miss Fortune": "MissFortune", "Jarvan IV": "JarvanIV",
         "Lee Sin": "LeeSin"
     }
     
-    if champion_name in exceptions:
-        clean_name = exceptions[champion_name]
-    else:
-        clean_name = champion_name.replace("'", "").replace(" ", "").replace(".", "")
-        
+    clean_name = exceptions.get(champion_name, champion_name.replace("'", "").replace(" ", "").replace(".", ""))
+    
+    # Oficjalne CDN Riotu z poprawnym patchem w chmurze zadziała bez problemu
     return f"https://ddragon.leagueoflegends.com/cdn/{PATCH_VERSION}/img/champion/{clean_name}.png"
 
 def render_team_gallery(champions_list, title):
